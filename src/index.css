@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-brand-bg: #f8fafc;
+  --color-brand-card: #ffffff;
+  --color-brand-primary: #3b82f6;
+  --color-brand-accent: #f43f5e;
+  --color-brand-soft: #f1f5f9;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans select-none antialiased transition-colors duration-300;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button, a, [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-200 dark:bg-slate-800 rounded-full;
+  }
+
+  .card-shadow {
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.dark .card-shadow {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+}
+
+/* Page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.page-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.page-exit-active {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Prevent zoom on mobile */
+input {
+  font-size: 16px !important;
+}
+
+/* Particles Animation for Wins */
+@keyframes float-up {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+.particle {
+  position: absolute;
+  pointer-events: none;
+  animation: float-up 2s ease-out forwards;
+}
